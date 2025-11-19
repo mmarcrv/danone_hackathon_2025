@@ -82,6 +82,8 @@ st.markdown("""
 <div class='big-font'>
 This platform provides comprehensive analysis of customer reviews from Amazon to help Danone 
 make data-driven decisions and improve product performance.
+
+Here we will do a example analysis with the Danone Product: **Alpro**
 </div>
 """, unsafe_allow_html=True)
 
