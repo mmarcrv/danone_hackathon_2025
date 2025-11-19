@@ -177,7 +177,7 @@ import json
 
 url = "https://routellm.abacus.ai/v1/chat/completions"
 headers = {"Authorization": "Bearer s2_9eb1acc8c0914ca2817c26df7a1e2b10", "Content-Type": "application/json"}
-stream = False
+stream = True
 payload = {
   "model": "gpt-5",
   "messages": [
@@ -188,6 +188,18 @@ payload = {
   ],
   "stream": stream
 }
-
-response = requests.post(url, headers=headers, data=json.dumps(payload))
-print(response.json())
+if stream:
+  response = requests.post(url, headers=headers, data=json.dumps(payload), stream=True)
+  for line in response.iter_lines():
+    if line:
+      line = line.decode("utf-8")
+      if line.startswith("data: "):
+        line = line[6:]
+        if line == "[DONE]":
+          break
+        chunk = json.loads(line)
+        if chunk["choices"][0].get("delta"):
+          st.markdown(chunk["choices"][0]["delta"]["content"])
+else:
+  response = requests.post(url, headers=headers, data=json.dumps(payload))
+  st.markdown(response.json())

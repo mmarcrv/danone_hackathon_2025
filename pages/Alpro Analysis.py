@@ -52,3 +52,14 @@ with col2:
         <p>This would strengthen the success of the coconut line while exposing customers to the broader, high-quality flavour range Alpro offers.</p>
     </div>
     """, unsafe_allow_html=True)
+
+st.markdown("## Visualizations we made from the analysis")
+st.image("static/plot2.png")
+st.image("static/sentimentplot.png")
+
+
+st.markdown("## What does our code generate?")
+
+
+
+    
